@@ -10,8 +10,6 @@ const user = require('./models/user');
 var app = express();
 //db connections
 const url = 'mongodb://127.0.0.1:27017/node';
-var dbName = 'node';
-var client = new MongoClient(url);
  
 //settings 
 app.set('port', process.env.PORT || 3001);
@@ -37,7 +35,7 @@ app.use(require('./routes/user'));
 
 //Server is Listenning
 
-(async (db)=> {
+(async ()=> {
     try {
        await mongoose.connect(url, {'useCreateIndex': true, useNewUrlParser: true, useUnifiedTopology: true });
        console.log('Base de datos conectada!');
