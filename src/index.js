@@ -39,15 +39,9 @@ app.use(require('./routes/user'));
 
 (async (db)=> {
     try {
-       client = await MongoClient.connect(url,{
-          useUnifiedTopology: true, 
-          
-        });
-      
-     
-      console.log('conectado a la base de datos node !!'),
-  
-      client.close();
+       await mongoose.connect(url, {'useCreateIndex': true, useNewUrlParser: true, useUnifiedTopology: true });
+       console.log('Base de datos conectada!');
+       
     } catch(e) {
       console.error(e)
     }

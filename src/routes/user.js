@@ -6,10 +6,12 @@ const bodyParser = require('body-parser');
 
 app.get('/api/user',async (req, res)=>{
     const user = req.body
-    res.send('otro aqui ');
+    
     console.log('aqui consola')
   
-  await User.find({}).sort({'_id':-1}).exec((err, user) => {
+  await User.find({}).exec((err, user) => {
+      console.log('Entrando a la petición');
+      
       if(err) return res.status(500).send({message: 'Error en el servidor'});
       
       if(user) {
