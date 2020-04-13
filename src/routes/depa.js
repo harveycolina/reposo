@@ -1,62 +1,21 @@
 const {Router} = require('express');
-const app = Router();
-const Depa = require('../models/depa');
-const bodyParser = require('body-parser');
+const api = Router();
+const Depa = require('../controller/depa');
 
+const home = '/depa/';
+const create = '/depa/create';
+const id = '/depa/:id';
+const update= '/depa/:id';
+const delet= '/depa/:id';
 
-app.get('/api/depa/',async(req, res)=>{
+api.get(home, Depa.home)
 
-  await  Depa.find({}, (err, depa)=>{
-        if(err) return res.status(500).send ({messenge:'error de solicitud: ${err}'})
-        if(!depa) return res.status(404).send ({messenge:'no existe: ${err}'})
-        return res.send(200,{depa})
-        })
-})
+api.get(id, Depa.depaId)
 
-app.get('/api/depa/:id',async(req, res)=>{
-    let id = req.body.id
-    await Depa.findById(id, (err, idDepa)=>{
-        if(err) return res.send(status(500).send ({messenge:'error de solicitud: ${err}'}))
-        if(!idDepa)  return res.status(404).send ({messenge:'no existe: ${err}'})
-        return res.send(200,{id:idDepa})
+api.post(create, Depa.create)
 
-    })
-})
+api.put(update,Depa.updateDepa)
 
-app.post('/api/depa/create',async(re, res)=>{
-    let depa = new Depa()
-    depa.ident = req.body.ident
+api.delete(delet,Depa.deleteDepa)
 
-    depa.save( (err, depa, next)=>{
-        if(err) return res.status(500).send ({messenge:'error de solicitud: ${err}'})
-        return res.status(200).send({depa})
-    })
-    res.status(200).send({message:'registrado '})
-
-})
-
-app.put('/api/depa/:id',async(req , res)=>{
-    
-    let id = req.param.id
-    let update =req.body
-    await Depa.findByIdAndUpdate(update,(err, depaUpdate)=>{
-        if(err)return res.status(404).send ({messenge:'no existe: ${err}'})
-        return res.send(200,{id:depaUpdate})
-    })
-})
-
-app.delete('/api/depa/:id',async(req , res)=>{
-    let id = req.param.id
-    let idDelete = req.body
-    await Depa.findByIdAndRemove(idDelete, (err, depaDeleted)=>{
-        if(err) return res.status(500).send({messenge :'error ${err}'})
-        
-        depaUpdate.remove(err=>{
-            
-            if(err)return res.status(500).send ({messenge:'error : ${err}'})
-           res.status(200).send({messenge:'Eliminado: ${err}'})
-        })
-    })
-})
-
-module.exports = app
+module.exports = api

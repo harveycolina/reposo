@@ -1,10 +1,8 @@
 const {Schema, model} = require ('mongoose')
 const depaSchema = new Schema ({
     
- ident:{
-        type:String
-           
-    },
+    ident:{type:String, required:true},
+    depa: {type: Schema.Types.ObjectId, ref: 'Torre'},
     
     
 });

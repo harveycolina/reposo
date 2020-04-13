@@ -1,10 +1,9 @@
 const {Schema, model} = require ('mongoose')
 const conjuntoSchema = new Schema ({
     
- name_conjunto:{
-        type:String
-           
-    },
+    name_conjunto:{type:String, minlength: 4, required: true},
+    ubicacion: {type:String},
+    torre: {type: Schema.Types.ObjectId, ref: 'Torre'},
  
 
 });

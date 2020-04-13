@@ -1,10 +1,12 @@
 const {Schema, model} = require ('mongoose')
+
+
 const torreSchema = new Schema ({
     
- ident:{
-        type:String
-           
-    },
+ ident:{type:String, required: true},
+    depar: [{type: Schema.Types.ObjectId, ref: 'Depa'}],
+    conjunto: [{type: Schema.Types.ObjectId, ref: 'Conjunto'}],
+
     
     
 });

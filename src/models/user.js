@@ -3,23 +3,15 @@ const {Schema, model} = require ('mongoose')
 
 const userSchema = new Schema ({
     
-    first_name:{
-        type:String
-           
-    },
-    last_name:{
-        type:String
-        
-    }, 
+    first_name:{type:String},
+    last_name:{type:String}, 
     email:{
-        type:String
+        type:String,
+        lowercase: true
         
     },
-    type:{type:String, enum:['admin', 'user']}, 
-    password:{
-        type:String
-        
-    }
+    type:{type:String, enum:['admin', 'user']},  
+    password:{type:String}
 
 });
 

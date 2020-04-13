@@ -1,26 +1,25 @@
 const mongoose = require('mongoose') 
 const express = require('express');
+
 const path = require('path'); 
 const methodOverride = require('method-override');
 const session = require('express-session');
 const {MongoClient} = require('mongodb');
 const bodyParser = require('body-parser');
-const user = require('./models/user');
+
 //Initializations
-var app = express();
+const app = express();
 //db connections
 const url = 'mongodb://127.0.0.1:27017/node';
  
 //settings 
-app.set('port', process.env.PORT || 3001);
+app.set('port', process.env.PORT || 3001); 
 
 //Middlewares 
 
 
 app.use(bodyParser.json());
-// app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(session({
     secret:'123',
@@ -29,11 +28,12 @@ app.use(session({
 }));
 
 //Routs
-app.use(require('./routes/index'));
 app.use(require('./routes/user'));
+app.use(require('./routes/depa'));
+app.use(require('./routes/torre'));
+app.use(require('./routes/conjunto'));
  //Statics Files
-
-//Server is Listenning
+ 
 
 (async ()=> {
     try {
